@@ -16,15 +16,46 @@
                 
 //// -------------------------------------- Javascript ---------------------------------------------
 {
-
 Lang:           JavaScript
 First appeared: 1995
 Designed by:    Brendan Eich
 Paradigm:       High-level, dynamic, weakly typed, prototype-based, multi-paradigm, and 
                 interpreted programming language.    
 
-ES2015 (ES6)
+---
+				
+ES2018 (ES9)
+    Asynchronous Iteration              ( for await (let e of elems) {...} )
+    Promise.finally()					( .finally(() => {...} )
+	Rest/Spread for objects				( function restParam({ a, ...x }) and const { a, ...x } = myObject )
+	Regular Expression Improvements		()
+	
+    * Ref:
+        https://www.sitepoint.com/es2018-whats-new/   
+                	
+ES2017 (ES8)
+    // -- Major Features
+    Async Functions                     ( async function asyncFunc() { const result = await otherAsyncFunc().. } )
+      (aka async and await)                             
+    Shared Memory & Atomics             ( SharedArrayBuffer, Atomics.store(), Atomics.load() ...) 
     
+	// -- Other Features
+    Object.entries() & Object.values()  ( for(const [key,val] of Object.entries(obj))..., for (const val of Object.values(obj)) )
+    String - padStart() and padEnd()    ( 'x'.padStart(5, 'ab') /*'ababx' */ , 'x'.padEnd(5, 'ab') //'xabab')
+    Object.getOwnPropertyDescriptors()  ( Object.getOwnPropertyDescriptors(obj) )     
+    Trailing commas                     ( let arr = [12, 13, 14,] )
+    
+    * Ref:
+        http://exploringjs.com/es2016-es2017/index.html                 	
+		
+ES2016 (ES7)
+    Array method includes    	( ['a', 'b', 'c'].includes('a') // true )
+    Exponentiation op. (**) 	( x ** y produces the same result as Math.pow(x, y) )
+
+    *Ref:
+        http://exploringjs.com/es2016-es2017/index.html
+    
+ES2015 (ES6)
     // -- Major Features
     Classes                 (classes instead of constructor functions, e.g. class Person {...}
       and Derived classes   (e.g. class Employee extends Person {...}
@@ -45,40 +76,14 @@ ES2015 (ES6)
     Destructing arrays      (const [, year, month, day] = arr    // skip arr[0] )
     Destructing objects     (const {name, age} = person )                        
     Default parameters      (function foo(a, b = 1) )                            
-    Rest parameters         (rest parameter (...args) instead of arguments (arguments))
+    Rest parameters         (Use ...args instead of arguments (arguments) e.g. function aggr(initVal, ...restParams))
     Spread operator '...'   (spread operator '...' instead of apply() e.g. arr1.push(...arr2) )
     Method definitions      (const myFuncs = { f1() {...}, f2() {...} } )
         
     *Ref:
         http://exploringjs.com/es6/ch_core-features.html
         https://github.com/lukehoban/es6features
-        
-		
-ES2016 (ES7)
-    Array method includes    	(['a', 'b', 'c'].includes('a') // true )
-    Exponentiation op. (**) 	(x ** y produces the same result as Math.pow(x, y) )
-
-    *Ref:
-        http://exploringjs.com/es2016-es2017/index.html
-    
-	
-ES2017 (ES8)
-    // -- Major Features
-    Async Functions                     (async function asyncFunc() { const result = await otherAsyncFunc().. } )
-      (aka async and await)                             
-    Shared Memory & Atomics             (SharedArrayBuffer, Atomics.store(), Atomics.load() ...) 
-    
-	// -- Features
-    Object.entries() & Object.values()  (for(const [key,val] of Object.entries(obj))..., for (const val of Object.values(obj)) )
-    String - padStart() and padEnd()    ('x'.padStart(5, 'ab') /*'ababx' */ , 'x'.padEnd(5, 'ab') //'xabab')
-    Object.getOwnPropertyDescriptors()  (Object.getOwnPropertyDescriptors(obj) )     
-    Trailing commas                     (let arr = [12, 13, 14,] )
-    
-    * Ref:
-        http://exploringjs.com/es2016-es2017/index.html    
-               
-... 
-}        
+}
 
 //// -------------------------------------- C++ ---------------------------------------------
 {
@@ -90,11 +95,72 @@ Paradigm:        Multi-paradigm: procedural, functional, object-oriented, generi
 
 ----
 
-C++98            
-(Major)            
+C++20 (major)
+	// -- Major Features
+	Concepts						()
+	Modules							()
+	Coroutines						()
+	Ranges							()
+	Contracts						()
+	
+	// -- Other Features
+	operator<=>						( auto operator<=>(const Person &) = default; // request compiler generated compare 
+																				  // funcs.  ( ==, !=, <, >, <=, >= ) )
 
-C++03
-(TC, bug fixes only)
+	// .. todo
+
+	*Ref:
+		https://www.reddit.com/r/cpp/comments/au0c4x/201902_kona_iso_c_committee_trip_report_c20/
+		https://en.wikipedia.org/wiki/C%2B%2B20
+
+C++17 (medium)
+    // -- Major Features
+    Parallel STL algorithms           (permit parallel/unseq/vectorel execution: std::sort(std::par, vec.begin(), vec.end()))
+    Filesystem library                (std::filesystem::path, directory iterators, files ops: copy/move, create, symlinks)
+                                      
+    // -- Other Features                    
+    Structured Binding (decomposers)  (const auto [a, b, c] = array - or cooler - for (const auto& [key,val] : myMap)) {...} )    
+    Nested namespaces                 (e.g., namespace X::Y { ... } instead of namespace X { namespace Y { ... }} )    
+    string_view                       (non-owning view of original string; a pointer to the internal buffer and the length)
+    std::optional                     (elegant way to return objects from functions that are allowed to be empty)
+    std::variant                      (Type safe unions! std::variant<int, float, std::string> var)
+    std::any                          (can create and assign to existing object any type. Replaces void*)
+    Inline variables                  (class ... { inline static const int COUNT = 100; } )
+    Init-statement for if/switch      (if (auto val = GetValue(); condition(val)) {...} )
+    if constexpr                      (The static/compile time-if for C++!, if constexpr(cond) { ... })
+    constexpr lambda                  (Compile-time lambdas, e.g. constexpr auto add = [] (int x, int y).. )
+    Template argument deduction       (std::pair pp(10, 3.14) - instead of - std::pair<int,double> pp(10, 3.14) )
+    UTF-8 Character Literals          (Euro sign: U+20AC - HEX, 4 bytes)
+    std::byte                         (Neither an integer nor a character, just data)
+    New algorithms                    (for_each_n, reduce, transform_reduce, exclusive_scan.. )
+    Searchers                         (boyer_moore_searcher, boyer_moore_horspool_searcher w/ std::search)
+                                      
+    // -- Removed Features            
+    'auto_ptr' removed                
+    'register' keyword removed        
+    throw() removed                   (void fooThrowsInt(int a) throw(int) {...} --> use noexcept instead) 
+        
+    *Ref: 
+        http://www.bfilipek.com/2017/11/cpp17summary.html
+        https://stackoverflow.com/questions/38060436/what-are-the-new-features-in-c17
+        https://github.com/AnthonyCalandra/modern-cpp-features#c171411
+        https://en.wikipedia.org/wiki/C%2B%2B17     
+
+C++14 (minor)
+    // -- Features
+    Automatic return type deduction   (for functions and lambdas, e.g.: 
+                                       auto f() { return 42; } // return type auto deduced as int )
+    Generic lambdas                   (auto saveEvent = [](auto const& event) { ... } )
+    Extended capturing in lambdas     (auto timer = [val = system_clock::now()] { ... } )
+    decltype(auto)                    (auto for generic (template) code, to perfectly forward a return type )       
+    Binary literals                   (auto a3 = 0b101010;  // ... binary )
+    Time literals                     (auto msec = 42ms;   // millisecond )
+    String literals                   (auto strA = "42"s;      // std::string )    
+    The [[deprecated]] attribute      ( [[ deprecated ]] void f() { ... } )
+    Digit separators                  (auto million = 1'000'000 )
+    Shared timed mutex & shared lock  (std::shared_timed_mutex)
+     
+    *Ref: https://isocpp.org/wiki/faq/cpp14-language
 
 C++11 (major)
     // -- Major Features
@@ -102,7 +168,7 @@ C++11 (major)
     Concurreny Support          (std::thread, std::async, std::future, std::mutex, std::condition_variable etc...)                                        
     Move semantics              (perf boost when used correctly instead of copy, e.g. newStr = std::move(str) )
     
-    // -- Features
+    // -- Other Features
     Smart pointers              (unique_ptr, shared_ptr, weak_ptr)    
     auto                        (automatic type deduction: e.g. auto x = Foo(..) )
     nullptr                     (std::nullptr object instead of usage null or 0)
@@ -133,59 +199,11 @@ C++11 (major)
     *Ref: https://en.wikipedia.org/wiki/C%2B%2B11
           https://www.codeproject.com/Articles/570638/Ten-Cplusplus-Features-Every-Cplusplus-Developer
 
-C++14
-(minor)
-    // -- Features
-    Automatic return type deduction   (for functions and lambdas, e.g.: 
-                                       auto f() { return 42; } // return type auto deduced as int )
-    Generic lambdas                   (auto saveEvent = [](auto const& event) { ... } )
-    Extended capturing in lambdas     (auto timer = [val = system_clock::now()] { ... } )
-    decltype(auto)                    (auto for generic (template) code, to perfectly forward a return type )       
-    Binary literals                   (auto a3 = 0b101010;  // ... binary )
-    Time literals                     (auto msec = 42ms;   // millisecond )
-    String literals                   (auto strA = "42"s;      // std::string )    
-    The [[deprecated]] attribute      ( [[ deprecated ]] void f() { ... } )
-    Digit separators                  (auto million = 1'000'000 )
-    Shared timed mutex & shared lock  (std::shared_timed_mutex)
-     
-    *Ref: https://isocpp.org/wiki/faq/cpp14-language
+C++03 (TC, bug fixes only)	
+	
+C++98 (Major)            
 
-C++17
-(medium)
-    // -- Major Features
-    Parallel STL algorithms           (permit parallel/unseq/vectorel execution: std::sort(std::par, vec.begin(), vec.end()))
-    Filesystem library                (std::filesystem::path, directory iterators, files ops: copy/move, create, symlinks)
-                                      
-    // -- Features                    
-    Structured Binding (decomposers)  (const auto [a, b, c] = array - or cooler - for (const auto& [key,val] : myMap)) {...} )    
-    Nested namespaces                 (e.g., namespace X::Y { ... } instead of namespace X { namespace Y { ... }} )    
-    string_view                       (non-owning view of original string; a pointer to the internal buffer and the length)
-    std::optional                     (elegant way to return objects from functions that are allowed to be empty)
-    std::variant                      (Type safe unions! std::variant<int, float, std::string> var)
-    std::any                          (can create and assign to existing object any type. Replaces void*)
-    Inline variables                  (class ... { inline static const int COUNT = 100; } )
-    Init-statement for if/switch      (if (auto val = GetValue(); condition(val)) {...} )
-    if constexpr                      (The static/compile time-if for C++!, if constexpr(cond) { ... })
-    constexpr lambda                  (Compile-time lambdas, e.g. constexpr auto add = [] (int x, int y).. )
-    Template argument deduction       (std::pair pp(10, 3.14) - instead of - std::pair<int,double> pp(10, 3.14) )
-    UTF-8 Character Literals          (Euro sign: U+20AC - HEX, 4 bytes)
-    std::byte                         (Neither an integer nor a character, just data)
-    New algorithms                    (for_each_n, reduce, transform_reduce, exclusive_scan.. )
-    Searchers                         (boyer_moore_searcher, boyer_moore_horspool_searcher w/ std::search)
-                                      
-    // -- Removed Features            
-    'auto_ptr' removed                
-    'register' keyword removed        
-    throw() removed                   (void fooThrowsInt(int a) throw(int) {...} --> use noexcept instead) 
-        
-    *Ref: 
-        http://www.bfilipek.com/2017/11/cpp17summary.html
-        https://stackoverflow.com/questions/38060436/what-are-the-new-features-in-c17
-        https://github.com/AnthonyCalandra/modern-cpp-features#c171411
-        https://en.wikipedia.org/wiki/C%2B%2B17
-}        
-
-
+}
 
 
 
