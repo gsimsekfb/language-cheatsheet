@@ -1,7 +1,7 @@
 
 # Language Reference (Version: 2019)
 
-Langugage features table for C++ and Javascript. More languages to come (Go, Rust, Java, Swift). 
+Language features table for C++ and Javascript. More languages to come (Go, Rust, Java, Swift). 
 
 <h1>
   <img src="lang_table_2019_vertical.png" width="">  
