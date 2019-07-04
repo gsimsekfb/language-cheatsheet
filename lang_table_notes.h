@@ -97,18 +97,20 @@ Paradigm:        Multi-paradigm: procedural, functional, object-oriented, generi
 
 C++20 (major)
 	// -- Major Features
-	Concepts						()
-	Modules							()
-	Coroutines						()
-	Ranges							()
-	Contracts						()
+	Concepts						( Def: template<typename T> concept Sortable = requires(T t) {...}; Use: void sort(Sortable& s); )
+	Modules							( No header file, all in cpp file: module pets.dog; import std.core; export class Dog {...} )
+	Coroutines						( todo.. A function is a coroutine if it uses one of: co_await, co_yield, co_return )
+	Ranges							( vector v{ 21, 1, 3, 1 }; v = std::move(v) | range_action::sort | range_action::unique; )
+	Contracts						( push(queue& q, val) [[expects: !q.full()]] [[ensures !q.empty()]]	{...[[assert: q.is_ok() ]]...} )
 	
 	// -- Other Features
-	operator<=>						( auto operator<=>(const Person &) = default; // request compiler generated compare 
-																				  // funcs.  ( ==, !=, <, >, <=, >= ) )
-
-	// .. todo
-
+	std::flatmap					( Ordered-vector based associative containers based. 
+	std::flatset					  Disadvantages of a sorted vector are linear-time insertions and linear-time deletions     
+									  In exchange, a vector offers about twice the lookup speed and a much smaller working set )
+	operator<=>						( auto operator<=>(const Person &) = default; ) // request compiler generated compare 
+																				    // funcs.  ( ==, !=, <, >, <=, >= ) )
+	// ... todo 																				
+																					
 	*Ref:
 		https://www.reddit.com/r/cpp/comments/au0c4x/201902_kona_iso_c_committee_trip_report_c20/
 		https://en.wikipedia.org/wiki/C%2B%2B20
