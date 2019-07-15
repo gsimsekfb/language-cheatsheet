@@ -1,4 +1,7 @@
 
+// 
+https://github.com/gsimsekfb/lang-ref
+
 // Next:
 	- Java	
 
@@ -23,7 +26,17 @@ Paradigm:       High-level, dynamic, weakly typed, prototype-based, multi-paradi
                 interpreted programming language.    
 
 ---
-				
+ES2019 (ES10)
+	flat() & flatMap() 					( arr = ['a', 'b', ['c']]; flattened = arr.flat(); // ["a", "b", "c"] )
+	Object.entries() and fromEntries()	( obj = {one: 1, two: 2}; Object.entries(obj) // [["one", 1], ["two", 2]] )
+	trimStart() and trimEnd()			( str = "   string   "; str.trimStart() //"string   "
+	escription property for Symbol objects	( let sym = Symbol('foo'); sym.description; // foo
+	Optional catch binding				( try {..} catch {/*catch without catching the value thrown*/}				
+
+	* Ref:
+		https://blog.logrocket.com/5-es2019-features-you-can-use-today/
+		https://2ality.com/2018/02/ecmascript-2019.html
+	
 ES2018 (ES9)
     Asynchronous Iteration              ( for await (let e of elems) {...} )
     Promise.finally()					( .finally(() => {...} )
@@ -57,29 +70,32 @@ ES2016 (ES7)
     
 ES2015 (ES6)
     // -- Major Features
-    Classes                 (classes instead of constructor functions, e.g. class Person {...}
-      and Derived classes   (e.g. class Employee extends Person {...}
-    Promises                (function f1() { return new Promise((resolve, reject) => {..}) } )
-    Modules                 (ES2015 Modules instead of CommonJS modules, e.g. export const COUNT = 44, 
-                             export function square(x) {...}, import { xx, yy } from 'lib';  )
-    Error class             (subclassing Error class instead of custom error constructors)
-    Map                     (Maps instead of objects, e.g. let myMap = new Map(), 
-                             arbitrary values for keys & values, not just strings)
-    // -- Features
-    const/let               (const/let (block-scoped) instead of var (function-scoped) )	
-    New Array methods       (e.g. arr.findIndex(x => Number.isNaN(x)), Array.from(),fill() etc.. ) 
-    New string methods      (str.startsWith(), endsWith(), includes(), repeat() ...)
-    String interpolation    (console.log(`(${x}, ${y})`) instead of console.log('('+x+', '+y+')') )
-    Multi-line strings      (e.g. `1st_Line 2nd_Line etc..` ) 
-    Arrow functions         (arrow functions don't shadow this, 
-                             e.g. x => x * x instead of function (x) { return x * x } )
-    Destructing arrays      (const [, year, month, day] = arr    // skip arr[0] )
-    Destructing objects     (const {name, age} = person )                        
-    Default parameters      (function foo(a, b = 1) )                            
-    Rest parameters         (Use ...args instead of arguments (arguments) e.g. function aggr(initVal, ...restParams))
-    Spread operator '...'   (spread operator '...' instead of apply() e.g. arr1.push(...arr2) )
-    Method definitions      (const myFuncs = { f1() {...}, f2() {...} } )
-        
+    Classes                 ( classes instead of constructor functions, e.g. class Person {...}
+      and Derived classes   ( e.g. class Employee extends Person {...}
+    Promises                ( function f1() { return new Promise((resolve, reject) => {..}) } )
+    Modules                 ( import React, { Component } from 'react'; export const COUNT = 44, 
+                              export function square(x) {...}, import { xx, yy } from 'lib';     )
+    Error class             ( subclassing Error class instead of custom error constructors)
+    Map                     ( Maps instead of objects, e.g. let myMap = new Map(), 
+                              arbitrary values for keys & values, not just strings)
+    // -- Features            
+    const/let               ( const/let (block-scoped) instead of var (function-scoped) )	
+    Arrow functions         ( x => x * x instead of function(x) { return x * x } )	
+	for...of 				( for (const e of array) {...})	 
+	Computed Properties 	( const key = 'age'; const obj = {[key]: 10}; // obj: {'age', 10} )
+	Object Short Notation   ( const name = 'Alex'; const obj = { name }; // obj: { name: 'Alex' } )
+	Object Concise Method	( obj = { f1(){return 10} } /*before es6*/: obj = { f1: function() {return 10} } )
+    String interpolation    ( console.log(`(${x}, ${y})`) instead of console.log('('+x+', '+y+')') )
+    Multi-line strings      ( e.g. `1st_Line 2nd_Line etc..` ) 
+    Destructing arrays      ( const [, year, month, day] = arr    // skip arr[0] )
+    Destructing objects     ( const {name, age} = person )                        
+    Default parameters      ( function foo(a, b = 1) )                            
+    Rest parameters         ( Use ...args instead of arguments (arguments) e.g. function(x, ...args))
+    Spread operator '...'   ( arr1.push(...arr2))
+    Method definitions      ( const myFuncs = { f1() {...}, f2() {...} } )
+    New Array methods       ( e.g. arr.findIndex(x => Number.isNaN(x)), Array.from(),fill() etc.. ) 
+    New string methods      ( str.startsWith(), endsWith(), includes(), repeat() ...)
+	
     *Ref:
         http://exploringjs.com/es6/ch_core-features.html
         https://github.com/lukehoban/es6features
