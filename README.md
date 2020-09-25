@@ -6,7 +6,7 @@ Language features table for:
   - Javascript 
  
  More languages to come: 
-   - Go, Rust, Java, Swift
+   - Python, Rust
 
 <h1>
   <img src="lang_table_2019_vertical.png" width="">  
