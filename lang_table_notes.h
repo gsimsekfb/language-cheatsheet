@@ -159,7 +159,8 @@ C++17 (medium)
     // -- Other Features                    
     Structured Binding (decomposers)  (const auto [a, b, c] = array/struct/pair/tuple e.g. for(auto& [key,val] : map)) {...} )    
     Nested namespaces                 (e.g., namespace X::Y { ... } instead of namespace X { namespace Y { ... }} )    
-    string_view                       (non-owning view of original string; a pointer to the internal buffer and the length)
+    string_view                       (string_view substr(string_view sv){..} 'instead of' string substr(string const& str){..}
+                                       * non-owning view of original string; a pointer to the internal buffer and the length )
     std::optional                     (std::optional<int> try_parse_int(std::string str)  // return an int or no value)
     std::variant                      (Type safe unions! std::variant<int, float, std::string> var)
     std::any                          (Use any if list of types are unknown, otherwise use variant. Replaces void*)
