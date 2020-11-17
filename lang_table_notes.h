@@ -133,46 +133,46 @@ Paradigm:        Multi-paradigm: procedural, functional, object-oriented, generi
     
 C++20 (major)
   // -- Big four
-  Concepts            ( Def: template<typename T> concept Sortable = requires(T t) {...}; 
-                        Use: sort(Sortable& auto s);                                                          )
-  Modules             ( Optionally no header file, all in one file. Use: import foo; Foo::getVal();
-                        Def module (foo.cppm): export module foo; namespace Foo { export getVal() {...}; }    ) 
-  Coroutines          ( A func is coroutine if has one of: co_await, co_yield, co_return (no generators support)
-  Ranges              ( vector v { 1, 3, 1 }; ranges::sort(v); 
-                        or chain -> auto v2 = v | views::filter( [](){..} ) | views::reverse | views::drop(2) )
-  
+  Concepts          ( Def: template<typename T> concept Sortable = requires(T t) {...}; 
+                      Use: sort(Sortable& auto s);                                                          )
+  Modules           ( Optionally no header file, all in one file. Use: import foo; Foo::f();
+                      Def module (foo.cppm): export module foo; namespace Foo { export f() {..} }           ) 
+  Coroutines        ( A func is coroutine if one used: co_await, co_yield, co_return                        )
+  Ranges            ( vector v { 1, 3, 1 }; ranges::sort(v); 
+                      or -> auto v2 = v | views::filter( [](){..} ) | views::reverse | views::drop(2)       )
+                    
   // -- Other Features
-  Designated init.    ( struct Person { int age = 0 } ; Person alex { .age = 42 }                             )
-  Init-statement      ( for (auto vec = getVec(); auto e : vec ) {...} )
-       range-for  
-  std::format         ( cout << format("Name:{0}, Surname: {1}", name, surname)                               )       
-  std::erase()        ( std::erase(v, 1); std::vector<int> v { 1,2,3,4,5 };
-  std::erase_if()       std::erase_if(v, [](int e) { return e == 2; });                                       )
-  std::span           ( read(span<int> buffer) instead of -> read(int* buffer, size_t buffer_size) 
-                        lite-weight abstraction of contiguous data -> span<int,42> arr                        )
-  operator<=>          ( a <=> b is >0 if a>b, <0 if a<b, 0 if a==b       
-                        auto operator<=>(const F&) const = default; ) // request ( ==, !=, <, >, <=, >= ) ops )                                            
-  bit ops             ( global funcs rotl() /*rotate left*/, rotr(), countl_zero() etc..                      )
-  calendar & timezone ( std::year, month, day. e.g. date1 { 2020y, September, 15d }                           )
-  constinit           ( Force compile time constant initialization
-                        constinit const int x { <static-init> } // compile err in case of dynamic init..      )
-  consteval           ( Force produce constant at compile time, like constexpr but compile time eval is forced
-                        consteval int sq(int x) { ... }; int a { 42 }; const res { sq(a) } // compile error   )
-  [=, this]           ( Since C++20 [=] wont implicitly capture this, [=, this] must be used to capture this  )
-  Templated lambdas   ( [] <typename T> (T t) { ... }                                                         )
-  [[likely]]          ( Hints for compilers to optimize certain branches                                      )
-  [[unlikely]]          switch(val){ [[likely]] case 1: ...; [[unlikely]] case 2: ...; // same for if branches)    
-  std::source_location( void log(..) { cout << "info:" << src_loc.file_name() << ':' << src_loc.line() ... }  )                        
-  Feature Testing     ( __cpp_coroutines, __cpp_ranges ...                                                    )
+  Designated init.  ( struct Person { int age = 0 } ; Person alex { .age = 42 }                             )
+  Init-statement    ( for (auto vec = getVec(); auto e : vec ) {...} )
+       range-for    
+  std::format       ( cout << format("Name:{0}, Surname: {1}", name, surname)                               )       
+  std::erase()      ( std::erase(v, 1); std::vector<int> v { 1,2,3,4,5 };
+  std::erase_if()     std::erase_if(v, [](int e) { return e == 2; });                                       )
+  std::span         ( read(span<int> buffer) instead of -> read(int* buffer, size_t buffer_size) 
+                      lite-weight abstraction of contiguous data -> span<int,42> arr                        )
+  operator<=>       ( a <=> b is >0 if a>b, <0 if a<b, 0 if a==b       
+                      operator<=>(const F&) = default; // request ( ==, !=, <, >, <=, >= ) ops )
+  bit ops           ( global funcs rotl() /*rotate left*/, rotr(), countl_zero() etc..                      )
+  calendar & tz     ( std::year, month, day. e.g. date1 { 2020y, September, 15d }                           )
+  constinit         ( Force compile time constant initialization
+                      constinit const int x { <static-init> } // compile err in case of dynamic init..      )
+  consteval         ( Force produce constant at compile time, like constexpr but compile time eval is forced
+                      consteval int sq(int x){..}; int a { 42 }; const res { sq(a) } // compile error       )
+  [=, this]         ( Since C++20 [=] wont implicitly capture this, [=, this] must be used to capture this  )
+  Templated lambdas ( [] <typename T> (T t) { ... }                                                         )
+  [[likely]]        ( Hints for compilers to optimize certain branches                                      )
+  [[unlikely]]        switch(val){ [[likely]] case 1: ...; [[unlikely]] case 2: ...; // same for if branches)    
+  source_location   ( void log(..) { cout << "info:" << src_loc.file_name() << ':' << src_loc.line() ... }  )                        
+  Feature Testing   ( __cpp_coroutines, __cpp_ranges ...                                                    )
           Macros
     
   // -- Concurrency
-  std::jthread        ( doWork() { jthread job { [](){...} }; } /* auto join & cancel req. on destructor */  )
-  atomic smart ptrs   ( class concurrent_stack { ... atomic<shared_ptr<T>> head; }                           )
-  std::latch          ( a thread coordination point, threads block till given # of threads reach latch point )
-  std::barrier        ( thread coordination with phases, threads block till given # of threads reach barrier )
-  Semaphores          ( std::counting_semaphore: allows more than one concurrent access, 
-                        std::binary_semaphore  : alias for std::counting_semaphore with LeastMaxValue = 1    )  
+  std::jthread      ( doWork() { jthread job { [](){...} }; } /* auto join & cancel req. on destructor */  )
+  atomic smart ptrs ( class concurrent_stack { ... atomic<shared_ptr<T>> head; }                           )
+  std::latch        ( a thread coordination point, threads block till given # of threads reach latch point )
+  std::barrier      ( thread coordination with phases, threads block till given # of threads reach barrier )
+  Semaphores        ( std::counting_semaphore: allows more than one concurrent access, 
+                      std::binary_semaphore  : alias for std::counting_semaphore with LeastMaxValue = 1    )  
                                           
   *Ref:
     C++20: An (Almost) Complete Overview - Marc Gregoire - CppCon 2020
@@ -181,100 +181,111 @@ C++20 (major)
     https://en.wikipedia.org/wiki/C%2B%2B20
 
 C++17 (medium)
-    // -- Major Features
-    Parallel STL algorithms           (permit parallel/unseq/vectorel execution: std::sort(std::par, vec.begin(), vec.end()))
-    Filesystem library                (std::filesystem::path, directory iterators, files ops: copy/move, create, symlinks)
-                                      
-    // -- Other Features                    
-    Structured Binding (decomposers)  (const auto [a, b, c] = array/struct/pair/tuple e.g. for(auto& [key,val] : map)) {...} )    
-    Nested namespaces                 (e.g., namespace X::Y { ... } instead of namespace X { namespace Y { ... }} )    
-    string_view                       (string_view substr(string_view sv){..} 'instead of' string substr(string const& str){..}
-                                       * non-owning view of original string; a pointer to the internal buffer and the length )
-    std::optional                     (std::optional<int> try_parse_int(std::string str)  // return an int or no value)
-    std::variant                      (Type safe unions! std::variant<int, float, std::string> var)
-    std::any                          (Use any if list of types are unknown, otherwise use variant. Replaces void*)
-    Inline variables                  (class ... { inline static const int COUNT = 100; } )
-    Init-statement for if/switch      (if (auto val = GetValue(); condition(val)) {...} )
-    if constexpr                      (The static/compile time-if for C++!, if constexpr(cond) { ... })
-    constexpr lambda                  (Compile-time lambdas, e.g. constexpr auto add = [] (int x, int y).. )
-    Template argument deduction       (std::pair pp(10, 3.14) - instead of - std::pair<int,double> pp(10, 3.14) )
-    UTF-8 Character Literals          (Euro sign: U+20AC - HEX, 4 bytes)
-    std::byte                         (Neither an integer nor a character, just data)
-    New algorithms                    (for_each_n, reduce, transform_reduce, exclusive_scan.. )
-    Searchers                         (boyer_moore_searcher, boyer_moore_horspool_searcher w/ std::search)
-                                      
-    // -- Removed Features            
-    auto_ptr removed                
-    register keyword removed        
-    throw() removed                   (void fooThrowsInt(int a) throw(int) {...} --> use noexcept instead) 
-        
-    *Ref: 
-        http://www.bfilipek.com/2017/11/cpp17summary.html
-        https://stackoverflow.com/questions/38060436/what-are-the-new-features-in-c17
-        https://github.com/AnthonyCalandra/modern-cpp-features#c171411
-        https://en.wikipedia.org/wiki/C%2B%2B17     
+  // -- Major Features
+  Parallel STL        ( permit parallel/unseq/vectorel execution: sort(std::par, vec.begin(), vec.end())   )
+      algorithms
+  Filesystem library  ( std::filesystem::path, directory iterators, files ops: copy/move, create, symlinks )
+                                    
+  // -- Other Features                       
+  Structured Binding  ( const auto [a,b,c] = array/struct/pair/tuple e.g. for(auto& [key,val] : map)) {..} )    
+        (decomposers)  
+  Nested namespaces   ( e.g., namespace X::Y { ... } instead of namespace X { namespace Y { ... }}         )    
+  string_view         ( string_view substr(string_view sv){..} 'instead of' string substr(string const& s) 
+                       * non-owning view of original string; ptr to the internal buffer and the length     )
+  std::optional       ( optional<int> try_parse_int(std::string str)  // return an int or no value         )
+  std::variant        ( Type safe unions -> std::variant<int, float, std::string> var                      )
+  std::any            ( Use any if list of types are unknown, otherwise use variant. Replaces void*        )
+  Inline variables    ( class ... { inline static const int COUNT = 100; }                                 )
+  Init-statement      ( if (auto val = GetValue(); condition(val)) {...}                                   )
+       if/switch
+  if constexpr        ( The static/compile time-if for C++!, if constexpr(cond) { ... }                    )
+  constexpr lambda    ( Compile-time lambdas, e.g. constexpr auto add = [] (int x, int y)..                )
+  Template argument   ( std::pair pp(10, 3.14) - instead of - std::pair<int,double> pp(10, 3.14)           )
+          deduction
+  UTF-8 Character     ( Euro sign: U+20AC - HEX, 4 bytes                                                   )
+         Literals
+  std::byte           ( Neither an integer nor a character, just data                                      )
+  New algorithms      ( for_each_n, reduce, transform_reduce, exclusive_scan..                             )
+  Searchers           ( boyer_moore_searcher, boyer_moore_horspool_searcher w/ std::search                 )
+                                    
+  // -- Removed             
+  auto_ptr
+  register
+  throw()             ( noexcept instead of -> void fooThrowsInt(int a) throw(int) {..}                    ) 
+      
+  *Ref: 
+    http://www.bfilipek.com/2017/11/cpp17summary.html
+    https://stackoverflow.com/questions/38060436/what-are-the-new-features-in-c17
+    https://github.com/AnthonyCalandra/modern-cpp-features#c171411
+    https://en.wikipedia.org/wiki/C%2B%2B17     
 
 C++14 (minor)
-    // -- Features
-    Automatic return type deduction   (for functions and lambdas, e.g.: 
-                                       auto f() { return 42; } // return type auto deduced as int )
-    Generic lambdas                   (auto saveEvent = [](auto const& event) { ... } )
-    Extended capturing in lambdas     (auto timer = [val = system_clock::now()] { ... } )
-    decltype(auto)                    (auto for generic (template) code, to perfectly forward a return type )       
-    Binary literals                   (auto a3 = 0b101010;  // ... binary )
-    Time literals                     (auto msec = 42ms;    // millisecond )
-    String literals                   (auto strA = "42"s;   // std::string )    
-    The [[deprecated]] attribute      ( [[ deprecated ]] void f() { ... } )
-    Digit separators                  (auto million = 1'000'000 )
-    Shared timed mutex & shared lock  (std::shared_timed_mutex)
+  // -- Features
+  Auto return type  ( for functions & lambdas: auto f() { return 42; } // return type deduced as int   )
+  Generic lambdas   ( auto saveEvent = [](auto const& event) { ... }                                   )
+  Extended capture  ( auto timer = [val = system_clock::now()] { ... }                                 )
+        in lambdas                                                                                    
+  decltype(auto)    ( auto for generic (template) code, to perfectly forward a return type             )
+  Binary literals   ( auto a3 = 0b101010;  // ... binary                                               )
+  Time literals     ( auto msec = 42ms;    // millisecond                                              )
+  String literals   ( auto strA = "42"s;   // std::string                                              )
+  [[deprecated]]    ( [[ deprecated ]] void f() { ... }                                                )
+  Digit separators  ( auto million = 1'000'000                                                         )
+                                                                                                      
+  // -- Concurrency                                                                                   
+  shared_timed_mutex( std::shared_timed_mutex: protect shared data being accessed by multiple threads  )
+  std::shared_lock  ( general-purpose shared mutex ownership wrapper                                   )
      
-    *Ref: https://isocpp.org/wiki/faq/cpp14-language
+  *Ref: https://isocpp.org/wiki/faq/cpp14-language
 
 C++11 (major)
-    // -- Major Features
-    Multithreading memory model (and official support for multithreaded programming)    
-    Concurrency Support         (std::thread, std::async, std::future, std::mutex, std::condition_variable etc...)                                        
-    Move semantics              (perf boost when used correctly instead of copy, e.g. newStr = std::move(str) )
-    
-    // -- Other Features
-    Smart pointers              (unique_ptr, shared_ptr, weak_ptr)    
-    auto                        (automatic type deduction: e.g. auto x = Foo(..) )
-    nullptr                     (std::nullptr object instead of usage null or 0)
-    Range for loop              (e.g. for(auto const& name : names) {...} )        
-    Initializer lists           (std::vector<std::string> vec { "a", "b", "cd" } )
-    constexpr                   (Do things at compile time (not forced), constexpr int sq(int x) { return x^2; } )
-    Uniform initialization      (Foo f {'a', 43}, uniform type initialization that works on any object)
-    using                       (using MyInt = int - instead of - typedef int MyInt)
-    default'ed member functions (e.g. SomeType() = default; // Request compiler generated default constructor)
-    delete'ed member functions  (e.g. NonCopyable(const NonCopyable&) = delete; // Forbid copy construction)
-    override                    (class method identifier to make sure that base method is overridden)
-    final                       (final classes not extendable and class methods not be overridden)
-    Strongly-typed enums        (class enum instead of enum)
-    Lambdas                     (Functions defined on the fly e.g. [&captured_var](int e){return e*e})
-    non-member begin() & end()  (e.g. begin(myVector))
-    static_assert               (assertion check at compile-time) 
-                                (e.g. static_assert(Size < 3, "Size is too small") )
-    Type traits                 (e.g. static_assert(std::is_integral<T1>::value, "Type T1 must be integral") )
-    Variadic templates          (templates can take variable numbers of template parameters)
-    New string literals         (supports three Unicode encodings: UTF-8, UTF-16, and UTF-32)
-    long long int               (have no fewer than 64 bits. Solves 32-bit/64-bit problems of C++03 long int)
-    Attributes                  ([[ noreturn ]] void f() { throw "error"; }, syntax for compiler/tool extensions)
-    Hash tables                 (std::unordered_set, std::unordered_multiset, std::unordered_map, std::unordered_multimap)
-    Regular expressions         (new library, defined in the new header <regex>: std::regex, std::regex_search etc...)
-    Random number facilities    (Support for a number of standard distributions and three base generator engine algorithms)
-    std::auto_ptr is deprecated (use std::unique_ptr instead)
-        
-    *Ref: https://en.wikipedia.org/wiki/C%2B%2B11
-          https://www.codeproject.com/Articles/570638/Ten-Cplusplus-Features-Every-Cplusplus-Developer
+  // -- Major Features
+  Multithreading     ( memory model and official support for multithreaded programming                 )
+  Concurrency Supp.  ( std::thread, std::async, std::future, std::mutex, std::condition_variable etc.. )                                                
+  Move semantics     ( perf boost when used correctly instead of copy, e.g. newStr = std::move(str)    )
+  
+  // -- Other Features
+  Smart pointers     ( unique_ptr, shared_ptr, weak_ptr                                                )    
+  auto               ( automatic type deduction: e.g. auto x = Foo(..)                                 )
+  nullptr            ( std::nullptr object instead of usage null or 0                                  )
+  Range for loop     ( for(auto const& name : names) {...}                                             )        
+  Initializer lists  ( std::vector<std::string> vec { "a", "b", "cd" }                                 )
+  constexpr          ( Do things at compile time (not forced), constexpr int sq(int x) { return x^2; } )
+  Uniform init.      ( Foo f {'a', 43}, uniform type initialization that works on any object           )    
+  using              ( using MyInt = int - instead of - typedef int MyInt                              )
+  default            ( SomeType() = default; // Request compiler generated default constructor         )    
+  delete             ( NonCopyable(const NonCopyable&) = delete; // Forbid copy construction           )   
+  override           ( class method identifier to make sure that base method is overridden             )
+  final              ( final classes not extendable and class methods not be overridden                )
+  Typed enums        ( class enum instead of enum                                                      )           
+  Lambdas            ( [&captured_var](int e){return e*e}                                              )
+  non-member begin() ( begin(myVector)                                                                 )
+             & end()  
+  static_assert      ( assertion check at compile-time                                                 )  
+                     ( static_assert(Size < 3, "Size is too small")                                    )
+  Type traits        ( static_assert(std::is_integral<T1>::value, "Type T1 must be integral")          )
+  Variadic templates ( templates can take variable numbers of template parameters                      
+                       template<typename T, typename... Targs>                                         )
+  New string literals( supports three Unicode encodings: UTF-8, UTF-16, and UTF-32                     )
+  long long int      ( have no fewer than 64 bits. Solves 32-bit/64-bit problems of C++03 long int     )
+  Attributes         ( [[ noreturn ]] void f() { throw "error"; }, syntax for compiler/tool extensions )
+  std::map & set     ( unordered_set, unordered_multiset, unordered_map, unordered_multimap            )
+  Regular expressions( new library, header <regex>: std::regex, std::regex_search etc...               )
+  Random numbers     ( A number of standard distributions and three base generator engine algorithms   )
+  
+  // -- Deprecated
+  std::auto_ptr      ( use std::unique_ptr instead                                                     )
+      
+  *Ref: https://en.wikipedia.org/wiki/C%2B%2B11
+        https://www.codeproject.com/Articles/570638/Ten-Cplusplus-Features-Every-Cplusplus-Developer
 
 C++03 (TC, bug fixes only)  
+  ... 
   
 C++98 (Major)            
+  ... 
 
 }
-
-
-
 
 
 
