@@ -133,43 +133,43 @@ Paradigm:        Multi-paradigm: procedural, functional, object-oriented, generi
     
 C++20 (major)
   // -- Big four
-  Concepts          ( Def: template<typename T> concept Sortable = requires(T t) {...}; 
-                      Use: sort(Sortable& auto s);                                                          )
-  Modules           ( Optionally no header file, all in one file. Use: import foo; Foo::f();
-                      Def module (foo.cppm): export module foo; namespace Foo { export f() {..} }           ) 
-  Coroutines        ( A func is coroutine if one used: co_await, co_yield, co_return                        )
-  Ranges            ( vector v { 1, 3, 1 }; ranges::sort(v); 
-                      or -> auto v2 = v | views::filter( [](){..} ) | views::reverse | views::drop(2)       )
-                    
-  // -- Other Features
-  Designated init.  ( struct Person { int age = 0 } ; Person alex { .age = 42 }                             )
-  Init-statement    ( for (auto vec = getVec(); auto e : vec ) {...} )
-       range-for    
-  std::format       ( cout << format("Name:{0}, Surname: {1}", name, surname)                               )       
-  std::erase()      ( std::erase(v, 1); std::vector<int> v { 1,2,3,4,5 };
-  std::erase_if()     std::erase_if(v, [](int e) { return e == 2; });                                       )
-  std::span         ( read(span<int> buffer) instead of -> read(int* buffer, size_t buffer_size) 
-                      lite-weight abstraction of contiguous data -> span<int,42> arr                        )
-  operator<=>       ( a <=> b is >0 if a>b, <0 if a<b, 0 if a==b       
-                      operator<=>(const F&) = default; // request ( ==, !=, <, >, <=, >= ) ops )
-  bit ops           ( global funcs rotl() /*rotate left*/, rotr(), countl_zero() etc..                      )
-  calendar & tz     ( std::year, month, day. e.g. date1 { 2020y, September, 15d }                           )
-  constinit         ( Force compile time constant initialization
-                      constinit const int x { <static-init> } // compile err in case of dynamic init..      )
-  consteval         ( Force produce constant at compile time, like constexpr but compile time eval is forced
-                      consteval int sq(int x){..}; int a { 42 }; const res { sq(a) } // compile error       )
-  [=, this]         ( Since C++20 [=] wont implicitly capture this, [=, this] must be used to capture this  )
-  Templated lambdas ( [] <typename T> (T t) { ... }                                                         )
-  [[likely]]        ( Hints for compilers to optimize certain branches                                      )
-  [[unlikely]]        switch(val){ [[likely]] case 1: ...; [[unlikely]] case 2: ...; // same for if branches)    
-  source_location   ( void log(..) { cout << "info:" << src_loc.file_name() << ':' << src_loc.line() ... }  )                        
-  Feature Testing   ( __cpp_coroutines, __cpp_ranges ...                                                    )
+  Concepts          ( Def: template<typename T> concept Sortable = requires(T t) {...};                    
+                      Use: sort(Sortable& auto s);                                                         )
+  Modules           ( Optionally no header file, all in one file. Use: import foo; Foo::f();               
+                      Def module (foo.cppm): export module foo; namespace Foo { export f() {..} }          ) 
+  Coroutines        ( A func is coroutine if one used: co_await, co_yield, co_return                       )
+  Ranges            ( vector v { 1, 3, 1 }; ranges::sort(v);                                               
+                      or -> auto v2 = v | views::filter( [](){..} ) | views::reverse | views::drop(2)      )
+                                                                                                           
+  // -- Other Features                                                                                     
+  Designated init.  ( struct Person { int age = 0 } ; Person alex { .age = 42 }                            )
+  Init-statement    ( for (auto vec = getVec(); auto e : vec ) {...} )                                     
+       range-for                                                                                           
+  std::format       ( cout << format("Name:{0}, Surname: {1}", name, surname)                              )       
+  std::erase()      ( erase(vec, 1); instead of vec.erase(remove(vec.begin(), vec.end(), 2), vec.end())    )
+  std::erase_if()   ( erase_if(v, [](int e) { return e == 2; });                                           )
+  std::span         ( read(span<int> buffer) instead of -> read(int* buffer, size_t buffer_size)           
+                      lite-weight abstraction of contiguous data -> span<int,42> arr                       )
+  operator<=>       ( a <=> b is >0 if a>b, <0 if a<b, 0 if a==b                                           
+                      operator<=>(const F&) = default; // request ( ==, !=, <, >, <=, >= ) ops )           
+  bit ops           ( global funcs rotl() /*rotate left*/, rotr(), countl_zero() etc..                     )
+  calendar & tz     ( std::year, month, day. e.g. date1 { 2020y, September, 15d }                          )
+  constinit         ( Force compile time constant initialization                                           
+                      constinit const int x { <static-init> } // compile err in case of dynamic init..     )
+  consteval         ( Force produce constant at compile time, like constexpr but compile time eval forced  
+                      consteval int sq(int x){..}; int a { 42 }; const res { sq(a) } // compile error      )
+  [=, this]         ( C++20: [=] wont implicitly capture this, [=, this] must be used to capture this      )
+  Templated lambdas ( [] <typename T> (T t) { ... }                                                        )
+  [[likely]]        ( Hints for compilers to optimize certain branches                                     )
+  [[unlikely]]        switch(val){ [[likely]] case 1: ...; [[unlikely]] case 2: ...; // same for if        )    
+  source_location   ( void log(..) { cout << src_loc.file_name() << ':' << src_loc.line() ... }            )                        
+  Feature Testing   ( __cpp_coroutines, __cpp_ranges ...                                                   )
           Macros
     
   // -- Concurrency
-  std::jthread      ( doWork() { jthread job { [](){...} }; } /* auto join & cancel req. on destructor */  )
+  std::jthread      ( doWork() { jthread job { [](){...} }; } /* auto join&cancel request in dtor */       )
   atomic smart ptrs ( class concurrent_stack { ... atomic<shared_ptr<T>> head; }                           )
-  std::latch        ( a thread coordination point, threads block till given # of threads reach latch point )
+  std::latch        ( a thread coordination point, threads block till given # of thrds reach latch point   )
   std::barrier      ( thread coordination with phases, threads block till given # of threads reach barrier )
   Semaphores        ( std::counting_semaphore: allows more than one concurrent access, 
                       std::binary_semaphore  : alias for std::counting_semaphore with LeastMaxValue = 1    )  
@@ -195,7 +195,7 @@ C++17 (medium)
   std::optional       ( optional<int> try_parse_int(std::string str)  // return an int or no value         )
   std::variant        ( Type safe unions -> std::variant<int, float, std::string> var                      )
   std::any            ( Use any if list of types are unknown, otherwise use variant. Replaces void*        )
-  Inline variables    ( class ... { inline static const int COUNT = 100; }                                 )
+  inline static       ( class Foo { inline static const int COUNT = 100; } in .h instead of in .h & .cpp   )
   Init-statement      ( if (auto val = GetValue(); condition(val)) {...}                                   )
        if/switch
   if constexpr        ( The static/compile time-if for C++!, if constexpr(cond) { ... }                    )
@@ -265,7 +265,7 @@ C++11 (major)
                      ( static_assert(Size < 3, "Size is too small")                                    )
   Type traits        ( static_assert(std::is_integral<T1>::value, "Type T1 must be integral")          )
   Variadic templates ( templates can take variable numbers of template parameters                      
-                       template<typename T, typename... Targs>                                         )
+                       template<typename T, typename... Args>                                          )
   New string literals( supports three Unicode encodings: UTF-8, UTF-16, and UTF-32                     )
   long long int      ( have no fewer than 64 bits. Solves 32-bit/64-bit problems of C++03 long int     )
   Attributes         ( [[ noreturn ]] void f() { throw "error"; }, syntax for compiler/tool extensions )
@@ -280,14 +280,76 @@ C++11 (major)
         https://www.codeproject.com/Articles/570638/Ten-Cplusplus-Features-Every-Cplusplus-Developer
 
 C++03 (TC, bug fixes only)  
-  ... 
-  
-C++98 (Major)            
-  ... 
+C++98 (Major)       
+and before
+  // 
+  decltype          ( int x = 0; -> decltype(x) y = 0; // y: int                                       )
+  explicit          ( forbid implicit ctor conversion: explicit A(int); Ex: A a = 12; // compile error )
+  virtual           ( dynamic binding happens virtual function is called ref or ptr to base-class      )
+  Virtual dtor      ( force derived dtor to be called when base ptr to a derived object is deleted     )
+  Pure virtual func ( Base: int price() const = 0  // force derived class to implement this func       )
+  Abstract class    ( A class containing at least one pure virtual function                            )
+  Func ptrs         ( int (*f1)(int, int); f1(3,4);                                                    )
+  const member func ( void Foo::getVal() const                                                         )
+  extern            ( forward declare & use global var: aa.cpp: extern int global_x;
+                      Define only once in another source file: bb.cpp: int global_x = 42               )
+  #ifdef #ifndef    ( #ifndef XX / #define XX / #endif                                                 )
+  char char* char[] ( char str1[] = "Hello"; char* str2 = "Hello"; char* str3 = new char[28]{'a','b'}; ) 
+  dynamic_cast<>    ( Safely convert ptrs and refs to classes up, down, and sideway inherit. hierarchy 
+                      Base* base = new Derived; if(Derived* d = dynamic_cast<Derived*>(base) {..}      )
+  static_cast<>     ( Convert between types using a combination of implicit and user-def conversions   
+                      int x = static_cast<int>(3.14); // x: 3                                          )
+  const_cast<>      ( remove the const-ness from ref/ptr that refer to something that is not const     
+                      int i = 3; const int& ri = i; const_cast<int&>(ri) = 4; // OK: modifies i        )
+  reinterpret_cast  ( convert types by reinterpreting underlying bit pattern                           )
+  switch/case       ( switch (ch) { case 'a': .. break; case 'b': ... break; default: ... break; }     )  
+  Local static obj  ( int count() { static int cnt=0; return ++cnt; }; // cnt destroyed at program exit)
+  Overloaded Func   ( return value is not part of function signature                                   )
+  Default Argument  ( void f1(int x, int y=0)                                                          )
+  inline funcs      ( a.h: inline get() {return 43} / b.h: inline get() {return 8}                     
+                      1. Each translation unit can (and must) supply its own copy of the func's def.                    
+                      2. Request compiler to replace each func. call with func body at compile time    )
+  static funcs      ( function should not be visible or shared outside of the translation unit         )
+  const member func ( void getX() const { return _x } 
+                      Const obj and ref or ptr to const objects, may call only const member func       ) 
+  struct            ( only difference between struct/class is the default access level public/private  )        
+  mutable           ( class Foo { mutable int cnt=0; }  // modify cnt even inside a const member func  ) 
+  Delegating Ctors  ( Sales_data(string s) : Sales_data() {...};                                       )
+  Aggregate Class   ( All members public, no ctors, no in-class initializers, no base class, virt. func
+                      struct Data { int val; string str; }                                             )
+  emplace_back      ( vec.emplace_back("Alex", 35) instead of vec.push_back(Person("Alex", 25))        )  
+  mutable lambda    ( [i]() mutable {return ++i; } // w/o mutable compile error: i read-only           )  
+  protected         ( allow derived class members to access while banning access to class users        )
+  Exceptions in dtor( Dtors should never have exceptions, o/w terminates or yields undefined behavior  )  
+  throw             ( try{ } catch (){  throw // re-throw  }                                           )  
+  catch(...)        ( try{ } catch (...) // catch all exceptions {  }                                  )
+  noexcept          ( f() noexcept; /*won't throw*/ - f() noexcept(true);  // won't throw  
+                      f();          /*might throw*/ - f() noexcept(false); // might throw              )
+  copy ctor         ( Foo(Foo const& other): x(other.x), ptr(new int(*other.ptr)) {}                   ) 
+  copy-assign. op.  ( A& operator=(A const& rhs){ x = rhs.x;  ptr = new int(*rhs.ptr); return *this; } )
+  move ctor         ( A(A&& rhs): x(rhs.x), ptr(new string(*rhs.ptr)) {rhs.x = 0; rhs.ptr = nullptr;}  )
+  move assign. op.  ( A& operator=(A&& rhs){ if (this != &rhs){ x = rhs.x; *ptr = *rhs.ptr;  
+                                             rhs.age = 0; rhs.pstr = nullptr; } return *this; }        )
+                                            
+  // Rarely used / Not to use        
+  macros            ( Do not use macros - #define square(X) X*X - Use: square(2)                       )   
+  placement new     ( ptr2 = new(ptr)Foo(); // construct new Foo at address "ptr"                      )       
+  Friend func       ( allow another function to access its nonpublic members 
+                      class F{ friend x(F&) /*x not class member*/ {return _x} } / main.cpp: getX(foo) )
+  Friend class      ( allow another class members to access nonpublic members this class
+                      class Screen {  friend class Window_mgr; ... }                                   )
+  volatile          ( volatile int x = 100; // To compiler: x can be changed by outside of program     )
+
+  // Debug
+  typeid / RTTI     ( Use for debugging purposes - typeid(foo.name())                                  )  
+  __FUNCTION__      ( local static defined by the compiler that holds the functions name               )
+  __FILE__          ( string  - name of the file                                                       )
+  __LINE__          ( integer - current line number                                                    )
+  __TIME__          ( string  - time the file was compiled                                             )
+  __DATE__          ( string  - date the file was compiled                                             )
+
+  // Misc
+  Archive libs      (.a, .a, .lib: for static linking ...                                              )
+  Dynamic libs      (.so, .dylib, .dll: for dynamic linking                                            )
 
 }
-
-
-
-
-
