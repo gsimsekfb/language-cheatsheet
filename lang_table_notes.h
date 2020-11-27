@@ -16,110 +16,6 @@ https://github.com/gsimsekfb/lang-ref
 
     . ES2017    
         http://exploringjs.com/es2016-es2017/pt_es2017.html    
-                
-//// -------------------------------------- Javascript ---------------------------------------------
-{
-Lang:           JavaScript
-First appeared: 1995
-Designed by:    Brendan Eich
-Paradigm:       High-level, dynamic, weakly typed, prototype-based, multi-paradigm, and 
-                interpreted programming language.    
-
----
-
-ES2020 (ES11)
-    Dynamic Import              let module = prompt("Enter module");  import(module).then(...)
-    Promise.allSettled          Promise.allSettled([promise_1, promise_2]).then() => { ... }
-                                // Resolved promise will return obj with status and value properties, 
-                                // while rejected ones will have status and reason.   
-    Top Level Await             const response = await fetch(url)
-    Class static Methods        class Foo { static staticMethod() {...} }
-    Nullish Coalescing Op. "??"     x = y ?? 42 // x is 42 if y is null or undefined
-    Optional Chaining           Obj: flower.species?.lily -- Array: flowers?.[1] -- Func: plantFlowers?.()  
-    BigInt                      BigInt(Number.MAX_SAFE_INTEGER+1) -> numbers larger than 2^53-1 (Number.MAX_SAFE_INTEGER)
-    globalThis                  Browser -> window == globalThis -- node.js -> global == globalThis 
-    String.matchAll             re = /(Mister )\w+/g;  matches = str.matchAll(re);
-
-    * Ref:
-    https://www.telerik.com/blogs/latest-features-javascript-ecmascript-2020
-    https://javascript.info/modules-dynamic-imports
-    https://dev.to/olivierloverde/es2020-summary-of-new-features-examples-2260
-
-ES2019 (ES10)
-  flat() & flatMap()          arr = ['a', 'b', ['c']]; flattened = arr.flat(); // ["a", "b", "c"] 
-  Object.entries() .fromEntries()     obj = {one: 1, two: 2};  Object.entries(obj) // [["one", 1], ["two", 2]]
-  trimStart() and trimEnd()     str = "   string   ";  str.trimStart() //"string   "
-  escription property for Symbol objs     let sym = Symbol('foo');  sym.description; // foo
-  Optional catch binding        try {..} catch {/*catch without catching the value thrown*/}        
-
-  * Ref:
-    https://blog.logrocket.com/5-es2019-features-you-can-use-today/
-    https://2ality.com/2018/02/ecmascript-2019.html
-  
-ES2018 (ES9)
-    Asynchronous Iteration              for await (let e of elems) {...}
-    Promise.finally()         .finally(() => {...} )
-  Rest/Spread for objects       function restParam({ a, ...x }) and const { a, ...x } = myObject
-  Regular Expression Improvements   ()
-  
-    * Ref:
-        https://www.sitepoint.com/es2018-whats-new/   
-                  
-ES2017 (ES8)
-    // -- Major Features
-    Async Functions                      async function asyncFunc() { const result = await otherAsyncFunc().. } 
-      (aka async and await)                             
-    Shared Memory & Atomics              SharedArrayBuffer, Atomics.store(), Atomics.load() ...) 
-    
-    // -- Other Features
-    Object.entries() & Object.values()   for(const [key,val] of Object.entries(obj)) {...}
-                                         for(const val of Object.values(obj)) {...} 
-    String - padStart() and padEnd()     'x'.padStart(5, 'ab') /*'ababx' */ , 'x'.padEnd(5, 'ab') //'xabab'
-    Object.getOwnPropertyDescriptors()   Object.getOwnPropertyDescriptors(obj)      
-    Trailing commas                      let arr = [12, 13, 14,] )
-    
-    * Ref:
-        http://exploringjs.com/es2016-es2017/index.html                   
-    
-ES2016 (ES7)
-    Array method includes     ['a', 'b', 'c'].includes('a') // true 
-    Exponentiation op. (**)   x ** y produces the same result as Math.pow(x, y)
-
-    *Ref:
-        http://exploringjs.com/es2016-es2017/index.html
-    
-ES2015 (ES6)
-    // -- Major Features
-    Classes                 ( classes instead of constructor functions, e.g. class Person {...}
-      and Derived classes   ( e.g. class Employee extends Person {...}
-    Promises                ( function f1() { return new Promise((resolve, reject) => {..}) } )
-    Modules                 ( import React, { Component } from 'react'; export const COUNT = 44, 
-                              export function square(x) {...}, import { xx, yy } from 'lib';     )
-    Error class             ( subclassing Error class instead of custom error constructors)
-    Map                     ( Maps instead of objects, e.g. let myMap = new Map(), 
-                              arbitrary values for keys & values, not just strings)
-    // -- Features            
-    const/let               ( const/let (block-scoped) instead of var (function-scoped) ) 
-    Arrow functions         ( x => x * x instead of function(x) { return x * x } )  
-    for...of                ( for (const e of array) {...})  
-    Computed Properties     ( const key = 'age'; const obj = {[key]: 10}; // obj: {'age', 10} )
-    Object Short Notation   ( const name = 'Alex'; const obj = { name }; // obj: { name: 'Alex' } )
-    Object Concise Method   ( obj = { f1(){return 10} } /*before es6*/: obj = { f1: function() {return 10} } )
-    String interpolation    ( console.log(`(${x}, ${y})`) instead of console.log('('+x+', '+y+')') )
-    Multi-line strings      ( e.g. `1st_Line 2nd_Line etc..` ) 
-    Destructing arrays      ( const [, year, month, day] = arr    // skip arr[0] )
-    Destructing objects     ( const {name, age} = person )                        
-    Default parameters      ( function foo(a, b = 1) )                            
-    Rest parameters         ( Use ...args instead of arguments (arguments) e.g. function(x, ...args))
-    Spread operator '...'   ( arr1.push(...arr2))
-    Method definitions      ( const myFuncs = { f1() {...}, f2() {...} } )
-    New Array methods       ( e.g. arr.findIndex(x => Number.isNaN(x)), Array.from(),fill() etc.. ) 
-    New string methods      ( str.startsWith(), endsWith(), includes(), repeat() ...)
-  
-    *Ref:
-        http://exploringjs.com/es6/ch_core-features.html
-        https://github.com/lukehoban/es6features
-}
 
 //// -------------------------------------- C++ ---------------------------------------------
 {
@@ -309,7 +205,7 @@ and before
   inline funcs      ( a.h: inline get() {return 43} / b.h: inline get() {return 8}                     
                       1. Each translation unit can (and must) supply its own copy of the func's def.                    
                       2. Request compiler to replace each func. call with func body at compile time    )
-  static funcs      ( function should not be visible or shared outside of the translation unit         )
+  static funcs      ( functions not be visible or shared outside of the translation unit               )
   const member func ( void getX() const { return _x } 
                       Const obj and ref or ptr to const objects, may call only const member func       ) 
   struct            ( only difference between struct/class is the default access level public/private  )        
@@ -341,6 +237,7 @@ and before
   volatile          ( volatile int x = 100; // To compiler: x can be changed by outside of program     )
 
   // Debug
+  set_terminate     ( stack trace for an uncaught exception                                            )
   typeid / RTTI     ( Use for debugging purposes - typeid(foo.name())                                  )  
   __FUNCTION__      ( local static defined by the compiler that holds the functions name               )
   __FILE__          ( string  - name of the file                                                       )
@@ -352,4 +249,228 @@ and before
   Archive libs      (.a, .a, .lib: for static linking ...                                              )
   Dynamic libs      (.so, .dylib, .dll: for dynamic linking                                            )
 
+}
+
+
+
+
+
+//// -------------------------------------- Python ---------------------------------------------
+{
+
+Lang:           Python    
+First appeared: 1991
+Designed by:    Guido van Rossum 
+Paradigm:       Multi-paradigm: functional, imperative, object-oriented, structured, reflective
+Typing:         Duck, dynamic, gradual
+----
+    
+...
+
+  Dictionaries   ( d = { 'x':3, 'y': 'str' } // unique keys                           
+                   use: d['x'] /*x:3*/ , d['g'] = 42, for k, v in d.items(): ..       )
+  Sets           ( s = {1,1,2} // s:1,2 // unique, heterogeneous, im-mutable elems    )
+  Tuples         ( t = 1, 'a', 3   // heterogeneous, im-mutable elems, fixed size     )
+  Lists          ( l = [3, 'b', 5] // heterogeneous, mutable elems                    )
+  Arrays         ( arr = [3, 5, 1] // homogeneous, mutable elems, fixed size          )
+  Strings        ( s = 'str'       // homogeneous, im-mutable elems, same as "str"    )
+                                                                                      
+  Functions      ( def add(x, y): return x + y )                                      )
+  Lambdas        ( def increment(n):  return lambda x: x + n )                        )
+  Standard params( def f(arg): // use: f(2) or f(arg=2)                               )
+  Positional prms( def f(arg, /): // use: f(2) only                                   )
+  Keyword params ( def f(*, arg): // use: f(arg=2) only                               )
+  Mixed params   ( def f(pos1, pos2, /, pos_or_kwd, *, kwd1, kwd2): ...               )
+  pass           ( Do nothing. use: while True: pass /*Busy-wait*/ , class Foo: pass  )
+  """ """        ( Func documentation: def f():  """ Do nothing, but document it """  )
+  ** unpack args ( d = {"y": 22, "x": 11} , f(**d) , def f(x, y=0, z=0): ...          )
+  Variadic funcs ( def j(*args, sep="/"): return sep.join(args), j("a", "b") // 'a/b' )
+  global         ( global x   // use global/module x                                  )
+  nonlocal       ( nonlocal y // use variable from outer scope                        )
+                                                                                      
+  Classes        (class Foo:  // Use: f = Foo(3.0, -4.5)                              
+                    def __init__(self, x, y):                                         
+                      self.x = x   # instance variable unique to each instance                   
+                    counter = 0    # class variable shared by all instances           )
+  Inheritance    ( class Fish(Animal): ...                                            )
+  Multi. Inher.  ( class DerivedClass(Base1, Base2, Base3):                           )
+                                                                                      
+  if else        ( if b > a: ... elif a == b: ... else: ...                           )
+  for in         ( for i in iterable: ..., use: for i in range(3): /*i: 0,1,2*/       )
+  for in else    ( for x in seq: if x==5: /*found*/, break, else: /*Failed to find*/  )
+  No switch/case ( N/A                                                                )
+  Ternary Op.    ( result = x if a > b else y)                                        )
+  Exceptions     ( try: x = 10/2, except ValueError: .. , except: raise,              
+                                  else:    // execute if no except raised in try      
+                                  finally: // always execute                          )
+  range()        ( range(3) /*0,1,2*/ , range(0,5,2) /*0,2,4*/                        )
+  Slice Notation ( arr[x:y] /*items x to y-1*/, arr[x:] // from x till end            
+                   arr[:y] /*begin till y-1*/, a[:] // copy of all items              
+                   arr[x:y:step] // x through not past y, by step                     )
+                                                                                      
+  // Modules                                                                          
+  import         ( 'import os' instead of 'from os import *'                            
+                   This will prevent os.open() shadowing the built-in open() function )
+  import as      ( import cv2 as cv                                                   )
+  dir(os)        ( list of all module functions                                       )
+  for in dir()   ( ex: list all 'event's in OpenCV module                             
+                   events = [e for e in dir(cv) if 'EVENT' in e]                      
+                   events = [e for e in dir(cv) if 'event' in e.lower()]              )
+  help(os)       ( manual page                                                        )
+  from import    ( from math import add, multiply                                     )
+  from import *  ( from math import *  // bad practice                                )
+  from import as ( from math import multiply as mult                                  )
+  import x.y     ( import sound.effects.echo                                          )
+  from x.y import z ( from sound.effects import echo                                  )
+  Intra-package  ( from . import echo                                                 
+    References     from .. import formats                                             
+                   from ..filters import equalizer                                    )                                                                                      
+  __init__.py    ( sound/  // Top-level package                                       
+                      __init__.py          // Initialize the sound package            )
+
+  // Debug 
+  sys.argv[1]   ( 42 -> python main.py 42                                             )
+  print(f'..')  ( print(f'xx: {xx}')  // same as print("xx: ", xx)                            
+                  print(f'aa: {aa:-5}, bb: {bb:2.2%}')  // aa: 42572, bb: 88.00%      
+                  aa = 42_572, bb = 88/100                                            )        
+  dir(sys)      ( list of names a module or a file defines                            
+        or dir()                                                                      )
+  dir(builtins) ( list the names of built-in functions and variables                  )
+  __name__      ( module name, ex: print("inside module:", __name__ )                 )
+  Comments      ( # this is a comment in python                                       
+                  No multi line comment support                                       )
+  logging       ( import logging, logging.debug('...')  // also: info, warn, err, cri )
+  sys.path      ( one of the Module Search Paths                                      )
+  sys.exit()    ( terminate a script                                                  )
+
+  // Misc
+  python -c "code" ( python -c "import keras; print(keras.__version__)"               )
+  __annotations__  ( Function Annotations, use: f.__annotations__                     )
+  json             ( import json,  j='{ "x":3}' , y=json.loads(j) , y["x"] // 3       
+                    // parse j, y is a Python dictionary, y: { "x":3 }                )
+  42_572           ( same as 42572                                                    )
+                                                                                      )
+  // Async                                                                            )
+  ...todo          ( import threading, ...                                            )
+                                                                                      )
+  // Quirks                                                                           )
+  Variable Scope   ( for x in range(10): ... / print(x) // x lives after for scope    )
+                                                                                      
+  // pip / Package Man.                                                               
+  pip show tensorflow         // package info                                         )
+  pip install pyinstaller     // install                                              )
+  pip install tensorflow -U   // upgrade                                              )
+  python -m site --user-site  // local packages path                                  )
+    e.g. C:\Users\<user>\AppData\Roaming\Python\Python37\site-packages                )
+  
+}
+
+
+
+
+
+
+                
+//// -------------------------------------- Javascript ---------------------------------------------
+{
+Lang:           JavaScript
+First appeared: 1995
+Designed by:    Brendan Eich
+Paradigm:       High-level, dynamic, weakly typed, prototype-based, multi-paradigm, and 
+                interpreted programming language.    
+
+---
+
+ES2020 (ES11)
+    Dynamic Import              let module = prompt("Enter module");  import(module).then(...)
+    Promise.allSettled          Promise.allSettled([promise_1, promise_2]).then() => { ... }
+                                // Resolved promise will return obj with status and value properties, 
+                                // while rejected ones will have status and reason.   
+    Top Level Await             const response = await fetch(url)
+    Class static Methods        class Foo { static staticMethod() {...} }
+    Nullish Coalescing Op. "??"     x = y ?? 42 // x is 42 if y is null or undefined
+    Optional Chaining           Obj: flower.species?.lily -- Array: flowers?.[1] -- Func: plantFlowers?.()  
+    BigInt                      BigInt(Number.MAX_SAFE_INTEGER+1) -> numbers larger than 2^53-1 (Number.MAX_SAFE_INTEGER)
+    globalThis                  Browser -> window == globalThis -- node.js -> global == globalThis 
+    String.matchAll             re = /(Mister )\w+/g;  matches = str.matchAll(re);
+
+    * Ref:
+    https://www.telerik.com/blogs/latest-features-javascript-ecmascript-2020
+    https://javascript.info/modules-dynamic-imports
+    https://dev.to/olivierloverde/es2020-summary-of-new-features-examples-2260
+
+ES2019 (ES10)
+  flat() & flatMap()          arr = ['a', 'b', ['c']]; flattened = arr.flat(); // ["a", "b", "c"] 
+  Object.entries() .fromEntries()     obj = {one: 1, two: 2};  Object.entries(obj) // [["one", 1], ["two", 2]]
+  trimStart() and trimEnd()     str = "   string   ";  str.trimStart() //"string   "
+  escription property for Symbol objs     let sym = Symbol('foo');  sym.description; // foo
+  Optional catch binding        try {..} catch {/*catch without catching the value thrown*/}        
+
+  * Ref:
+    https://blog.logrocket.com/5-es2019-features-you-can-use-today/
+    https://2ality.com/2018/02/ecmascript-2019.html
+  
+ES2018 (ES9)
+  Asynchronous Iteration           for await (let e of elems) {...}
+  Promise.finally()            .finally(() => {...} )
+  Rest/Spread for objects       function restParam({ a, ...x }) and const { a, ...x } = myObject
+  Regular Expression Improvements   ()
+  
+    * Ref:
+        https://www.sitepoint.com/es2018-whats-new/   
+                  
+ES2017 (ES8)
+    // -- Major Features
+    Async Functions                      async function asyncFunc() { const result = await otherAsyncFunc().. } 
+      (aka async and await)                             
+    Shared Memory & Atomics              SharedArrayBuffer, Atomics.store(), Atomics.load() ...) 
+    
+    // -- Other Features
+    Object.entries() & Object.values()   for(const [key,val] of Object.entries(obj)) {...}
+                                         for(const val of Object.values(obj)) {...} 
+    String - padStart() and padEnd()     'x'.padStart(5, 'ab') /*'ababx' */ , 'x'.padEnd(5, 'ab') //'xabab'
+    Object.getOwnPropertyDescriptors()   Object.getOwnPropertyDescriptors(obj)      
+    Trailing commas                      let arr = [12, 13, 14,] )
+    
+    * Ref:
+        http://exploringjs.com/es2016-es2017/index.html                   
+    
+ES2016 (ES7)
+    Array method includes     ['a', 'b', 'c'].includes('a') // true 
+    Exponentiation op. (**)   x ** y produces the same result as Math.pow(x, y)
+
+    *Ref:
+        http://exploringjs.com/es2016-es2017/index.html
+    
+ES2015 (ES6)
+    // -- Major Features
+    Classes                 ( classes instead of constructor functions, e.g. class Person {...}
+      and Derived classes   ( e.g. class Employee extends Person {...}
+    Promises                ( function f1() { return new Promise((resolve, reject) => {..}) } )
+    Modules                 ( import React, { Component } from 'react'; export const COUNT = 44, 
+                              export function square(x) {...}, import { xx, yy } from 'lib';     )
+    Error class             ( subclassing Error class instead of custom error constructors)
+    Map                     ( Maps instead of objects, e.g. let myMap = new Map(), 
+                              arbitrary values for keys & values, not just strings)
+    // -- Features            
+    const/let               ( const/let (block-scoped) instead of var (function-scoped) ) 
+    Arrow functions         ( x => x * x instead of function(x) { return x * x } )  
+    for...of                ( for (const e of array) {...})  
+    Computed Properties     ( const key = 'age'; const obj = {[key]: 10}; // obj: {'age', 10} )
+    Object Short Notation   ( const name = 'Alex'; const obj = { name }; // obj: { name: 'Alex' } )
+    Object Concise Method   ( obj = { f1(){return 10} } /*before es6*/: obj = { f1: function() {return 10} } )
+    String interpolation    ( console.log(`(${x}, ${y})`) instead of console.log('('+x+', '+y+')') )
+    Multi-line strings      ( e.g. `1st_Line 2nd_Line etc..` ) 
+    Destructing arrays      ( const [, year, month, day] = arr    // skip arr[0] )
+    Destructing objects     ( const {name, age} = person )                        
+    Default parameters      ( function foo(a, b = 1) )                            
+    Rest parameters         ( Use ...args instead of arguments (arguments) e.g. function(x, ...args))
+    Spread operator '...'   ( arr1.push(...arr2))
+    Method definitions      ( const myFuncs = { f1() {...}, f2() {...} } )
+    New Array methods       ( e.g. arr.findIndex(x => Number.isNaN(x)), Array.from(),fill() etc.. ) 
+    New string methods      ( str.startsWith(), endsWith(), includes(), repeat() ...)
+  
+    *Ref:
+        http://exploringjs.com/es6/ch_core-features.html
+        https://github.com/lukehoban/es6features
 }
