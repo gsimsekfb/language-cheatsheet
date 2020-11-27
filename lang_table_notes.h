@@ -265,8 +265,6 @@ Paradigm:       Multi-paradigm: functional, imperative, object-oriented, structu
 Typing:         Duck, dynamic, gradual
 ----
     
-...
-
   Dictionaries   ( d = { 'x':3, 'y': 'str' } // unique keys                           
                    use: d['x'] /*x:3*/ , d['g'] = 42, for k, v in d.items(): ..       )
   Sets           ( s = {1,1,2} // s:1,2 // unique, heterogeneous, im-mutable elems    )
@@ -349,7 +347,7 @@ Typing:         Duck, dynamic, gradual
   json             ( import json,  j='{ "x":3}' , y=json.loads(j) , y["x"] // 3       
                     // parse j, y is a Python dictionary, y: { "x":3 }                )
   42_572           ( same as 42572                                                    )
-                                                                                      )
+                                                                                      
   // Async                                                                            )
   ...todo          ( import threading, ...                                            )
                                                                                       )
@@ -382,95 +380,101 @@ Paradigm:       High-level, dynamic, weakly typed, prototype-based, multi-paradi
 ---
 
 ES2020 (ES11)
-    Dynamic Import              let module = prompt("Enter module");  import(module).then(...)
-    Promise.allSettled          Promise.allSettled([promise_1, promise_2]).then() => { ... }
-                                // Resolved promise will return obj with status and value properties, 
-                                // while rejected ones will have status and reason.   
-    Top Level Await             const response = await fetch(url)
-    Class static Methods        class Foo { static staticMethod() {...} }
-    Nullish Coalescing Op. "??"     x = y ?? 42 // x is 42 if y is null or undefined
-    Optional Chaining           Obj: flower.species?.lily -- Array: flowers?.[1] -- Func: plantFlowers?.()  
-    BigInt                      BigInt(Number.MAX_SAFE_INTEGER+1) -> numbers larger than 2^53-1 (Number.MAX_SAFE_INTEGER)
-    globalThis                  Browser -> window == globalThis -- node.js -> global == globalThis 
-    String.matchAll             re = /(Mister )\w+/g;  matches = str.matchAll(re);
-
-    * Ref:
-    https://www.telerik.com/blogs/latest-features-javascript-ecmascript-2020
-    https://javascript.info/modules-dynamic-imports
-    https://dev.to/olivierloverde/es2020-summary-of-new-features-examples-2260
+  Dynamic Import          ( let module = prompt("Enter module");  import(module).then(...)       )
+  Promise.allSettled      ( Promise.allSettled([promise_1, promise_2]).then() => { ... }         
+                            // Resolved promise will return obj with status & value props,       
+                            // while rejected ones will have status and reason.                  )
+  Top Level Await         ( const response = await fetch(url)                                    )
+  Class static Methods    ( class Foo { static staticMethod() {...} }                            )
+  Nullish Coalescing      ( x = y ?? 42 // x is 42 if y is null or undefined                     
+            Operator ??                                                                          )
+  Optional Chaining       ( Obj: x.y?.z -- Array: arr?.[1] -- Func: f1?.()                       )
+  BigInt                  ( BigInt(Number.MAX_SAFE_INTEGER+1)                                    
+                            For numbers larger than 2^53-1 (Number.MAX_SAFE_INTEGER)             )
+  globalThis              ( Browser: window == globalThis -- node.js: global == globalThis       )
+  String.matchAll         ( re = /(Mister )\w+/g;  matches = str.matchAll(re);                   )
+      
+  * Ref:
+  https://www.telerik.com/blogs/latest-features-javascript-ecmascript-2020
+  https://javascript.info/modules-dynamic-imports
+  https://dev.to/olivierloverde/es2020-summary-of-new-features-examples-2260
 
 ES2019 (ES10)
-  flat() & flatMap()          arr = ['a', 'b', ['c']]; flattened = arr.flat(); // ["a", "b", "c"] 
-  Object.entries() .fromEntries()     obj = {one: 1, two: 2};  Object.entries(obj) // [["one", 1], ["two", 2]]
-  trimStart() and trimEnd()     str = "   string   ";  str.trimStart() //"string   "
-  escription property for Symbol objs     let sym = Symbol('foo');  sym.description; // foo
-  Optional catch binding        try {..} catch {/*catch without catching the value thrown*/}        
+  flat() & flatMap()        ( arr = ['a', 'b', ['c']]; flattened = arr.flat(); // ["a","b","c"]  )
+  Object.entries()          ( obj = {a: 1, b: 2};  Object.entries(obj) // [["a", 1], ["b", 2]]   
+        .fromEntries()                                                                           )
+  trimStart() and trimEnd() ( str = "   string   ";  str.trimStart() // "string   "              )
+  Description property      ( let sym = Symbol('foo');  sym.description; // foo                   
+      for Symbol objs                                                                            )
+  Optional catch binding    ( try {..} catch {/*catch without catching the value thrown*/}       )
 
   * Ref:
     https://blog.logrocket.com/5-es2019-features-you-can-use-today/
     https://2ality.com/2018/02/ecmascript-2019.html
   
-ES2018 (ES9)
-  Asynchronous Iteration           for await (let e of elems) {...}
-  Promise.finally()            .finally(() => {...} )
-  Rest/Spread for objects       function restParam({ a, ...x }) and const { a, ...x } = myObject
-  Regular Expression Improvements   ()
+ES2018 (ES9)                                                                                       
+  Asynchronous Iteration ( for await (let e of elems) {...}                                      )
+  Promise.finally()      ( .finally(() => {...}                                                  )
+  Rest/Spread for objs   ( function restParam({ a, ...x }) and const { a, ...x } = myObject      )
+  Reg. Exp. Improvements ()
   
     * Ref:
         https://www.sitepoint.com/es2018-whats-new/   
                   
 ES2017 (ES8)
-    // -- Major Features
-    Async Functions                      async function asyncFunc() { const result = await otherAsyncFunc().. } 
-      (aka async and await)                             
-    Shared Memory & Atomics              SharedArrayBuffer, Atomics.store(), Atomics.load() ...) 
-    
-    // -- Other Features
-    Object.entries() & Object.values()   for(const [key,val] of Object.entries(obj)) {...}
-                                         for(const val of Object.values(obj)) {...} 
-    String - padStart() and padEnd()     'x'.padStart(5, 'ab') /*'ababx' */ , 'x'.padEnd(5, 'ab') //'xabab'
-    Object.getOwnPropertyDescriptors()   Object.getOwnPropertyDescriptors(obj)      
-    Trailing commas                      let arr = [12, 13, 14,] )
-    
-    * Ref:
-        http://exploringjs.com/es2016-es2017/index.html                   
+  // -- Major Features
+  Async Functions        ( async function asyncFunc() { const res = await otherAsyncFunc().. }   
+      async & await                                                                              )
+  Shared Memory & Atomics( SharedArrayBuffer, Atomics.store(), Atomics.load() ...)               )
+  
+  // -- Others
+  Object.entries()       ( for(const [key,val] of Object.entries(obj)) {...}                    
+        .values()          for(const val of Object.values(obj)) {...}                            )
+  String.padStart()      ( 'x'.padStart(5, 'ab') /*'ababx' */ ,                                  
+        .padEnd()          'x'.padEnd(5, 'ab') //'xabab'                                         )
+  Object.getOwnProp..()  ( Object.getOwnPropertyDescriptors(obj)                                 )
+  Trailing commas        ( let arr = [12, 13, 14,]                                               )
+  
+  * Ref:
+      http://exploringjs.com/es2016-es2017/index.html                   
     
 ES2016 (ES7)
-    Array method includes     ['a', 'b', 'c'].includes('a') // true 
-    Exponentiation op. (**)   x ** y produces the same result as Math.pow(x, y)
+  Array.includes()      ( ['a', 'b', 'c'].includes('a') // true                                  )
+  Exponentiation op. ** ( x**y produces the same result as Math.pow(x, y)                        )
 
-    *Ref:
-        http://exploringjs.com/es2016-es2017/index.html
+  *Ref:
+      http://exploringjs.com/es2016-es2017/index.html
     
 ES2015 (ES6)
-    // -- Major Features
-    Classes                 ( classes instead of constructor functions, e.g. class Person {...}
-      and Derived classes   ( e.g. class Employee extends Person {...}
-    Promises                ( function f1() { return new Promise((resolve, reject) => {..}) } )
-    Modules                 ( import React, { Component } from 'react'; export const COUNT = 44, 
-                              export function square(x) {...}, import { xx, yy } from 'lib';     )
-    Error class             ( subclassing Error class instead of custom error constructors)
-    Map                     ( Maps instead of objects, e.g. let myMap = new Map(), 
-                              arbitrary values for keys & values, not just strings)
-    // -- Features            
-    const/let               ( const/let (block-scoped) instead of var (function-scoped) ) 
-    Arrow functions         ( x => x * x instead of function(x) { return x * x } )  
-    for...of                ( for (const e of array) {...})  
-    Computed Properties     ( const key = 'age'; const obj = {[key]: 10}; // obj: {'age', 10} )
-    Object Short Notation   ( const name = 'Alex'; const obj = { name }; // obj: { name: 'Alex' } )
-    Object Concise Method   ( obj = { f1(){return 10} } /*before es6*/: obj = { f1: function() {return 10} } )
-    String interpolation    ( console.log(`(${x}, ${y})`) instead of console.log('('+x+', '+y+')') )
-    Multi-line strings      ( e.g. `1st_Line 2nd_Line etc..` ) 
-    Destructing arrays      ( const [, year, month, day] = arr    // skip arr[0] )
-    Destructing objects     ( const {name, age} = person )                        
-    Default parameters      ( function foo(a, b = 1) )                            
-    Rest parameters         ( Use ...args instead of arguments (arguments) e.g. function(x, ...args))
-    Spread operator '...'   ( arr1.push(...arr2))
-    Method definitions      ( const myFuncs = { f1() {...}, f2() {...} } )
-    New Array methods       ( e.g. arr.findIndex(x => Number.isNaN(x)), Array.from(),fill() etc.. ) 
-    New string methods      ( str.startsWith(), endsWith(), includes(), repeat() ...)
-  
-    *Ref:
-        http://exploringjs.com/es6/ch_core-features.html
-        https://github.com/lukehoban/es6features
+  // -- Major Features
+  Classes               ( classes instead of constructor functions, e.g. class Person {...}      )
+  Derived classes       ( class Employee extends Person {...}                                    )
+  Promises              ( function f1() { return new Promise((resolve, reject) => {..}) }        )
+  Modules               ( import React, { Component } from 'react'; export const COUNT = 44,     
+                          export function square(x) {...}, import { xx, yy } from 'lib';         )
+  Error class           ( subclassing Error class instead of custom error constructors           )
+  Map                   ( Maps instead of objects, e.g. let myMap = new Map(),                   
+                          arbitrary values for keys & values, not just strings                   )
+                          
+  // -- Others                                                                                 
+  const/let             ( const/let (block-scoped) instead of var (function-scoped)              )
+  Arrow functions       ( x => x * x instead of function(x) { return x * x }                     )
+  for...of              ( for (const e of array) {...}                                           )
+  Computed Properties   ( const key = 'age'; const obj = {[key]: 10}; // obj: {'age', 10}        )
+  Object Short Notation ( const name = 'Alex'; const obj = { name }; // obj: { name: 'Alex' }    )
+  Object Concise Method ( f = { f1(){return 5} } /*bef. es6*/: f = { f1: function(){return 10} } )
+  String interpolation  ( console.log(`(${x}, ${y})`) instead of console.log('('+x+', '+y+')')   )
+  Multi-line strings    ( e.g. `1st_Line 2nd_Line etc..` )                                       )
+  Destructing arrays    ( const [, year, month, day] = arr    // skip arr[0] )                   )
+  Destructing objects   ( const {name, age} = person )                                           )
+  Default parameters    ( function foo(a, b = 1) )                                               )
+  Rest parameters       ( Use ...args instead of arguments (arguments) e.g. function(x, ...args) )
+  Spread operator '...' ( arr1.push(...arr2)                                                     )
+  Method definitions    ( const myFuncs = { f1() {...}, f2() {...} }                             )
+  New Array methods     ( e.g. arr.findIndex(x => Number.isNaN(x)), Array.from(),fill() etc..    )
+  New string methods    ( str.startsWith(), endsWith(), includes(), repeat() ...                 )
+                                                                                                    
+  *Ref:                                                                                             
+      http://exploringjs.com/es6/ch_core-features.html                                              
+      https://github.com/lukehoban/es6features
 }
