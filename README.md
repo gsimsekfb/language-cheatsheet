@@ -3,10 +3,12 @@
 
 Language features table for:
   - C++ 
+  - Python
   - Javascript 
  
  More languages to come: 
-   - Python, Rust
+   - Rust?
+   - Haskel?
 
 <h1>
   <img src="lang_table.png" width="">  
