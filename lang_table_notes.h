@@ -38,7 +38,9 @@ C++20 (major)
                       or -> auto v2 = v | views::filter( [](){..} ) | views::reverse | views::drop(2)      )
                                                                                                            
   // -- Other Features                                                                                     
-  Designated init.  ( struct Person { int age = 0 } ; Person alex { .age = 42 }                            )
+  using enum        ( 1. enum class E {x,y}; switch(val) { using enum E; case x: case y: }
+                      2. struct Foo { using enum E; } / Foo f; f.x; or Foo::x; // OK, names E::x           )
+  Designated init.  ( struct Person { int age; int x; } ; Person alex { .age = 42, .x = 2 }                )
   Init-statement    ( for (auto vec = getVec(); auto e : vec ) {...} )                                     
        range-for                                                                                           
   std::format       ( cout << format("Name:{0}, Surname: {1}", name, surname)                              )       
@@ -151,7 +153,8 @@ C++11 (major)
   using              ( using MyInt = int - instead of - typedef int MyInt                              )
   default            ( SomeType() = default; // Request compiler generated default constructor         )    
   delete             ( NonCopyable(const NonCopyable&) = delete; // Forbid copy construction           )   
-  override           ( class method identifier to make sure that base method is overridden             )
+  override           ( class Base { virtual void f1() } , class Der : Base { void f1() override; }
+                       class method identifier to make sure that base method is overridden             )
   final              ( final classes not extendable and class methods not be overridden                )
   Typed enums        ( class enum instead of enum                                                      )           
   Lambdas            ( [&captured_var](int e){return e*e}                                              )
